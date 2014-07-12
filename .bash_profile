@@ -36,36 +36,6 @@ function parse_git_branch {
 
 }
 
-function git_new_feature(){
-    # create a new feature branch both locally and remote
-    FEATURE_NAME=$1;
-    if [ "x$FEATURE_NAME" == "x" ]; then
-echo "usage: git_new_feature <featurename>";
-return 1;
-    fi
-    git checkout develop;
-    DEVELOP_CHECK=$?;
-    if [ $DEVELOP_CHECK -ne 0 ]; then
-echo "Couldnt checkout develop branch... bailing";
-return 1;
-    fi
-    git pull;
-    PULL_CHECK=$?;
-    if [ $PULL_CHECK -ne 0 ]; then
-        echo "Couldnt update/pull develop branch... bailing";
-return 1;
-    fi
-    FEATURE_BRANCH="feature/${FEATURE_NAME}";
-    PKG_NAME=`snake_git_pkg_name`
-    if [ "x$PKG_NAME" != "x" ]; then
-        FEATURE_BRANCH="feature/${PKG_NAME}/${FEATURE_NAME}";
-    fi
-    git checkout -b $FEATURE_BRANCH;
-    git push origin $FEATURE_BRANCH;
-    git branch --set-upstream $FEATURE_BRANCH  origin/$FEATURE_BRANCH;
-
-}
-
 genpasswd() {
     local l=$1
     [ "$l" == "" ] && l=16
@@ -73,7 +43,7 @@ genpasswd() {
 }
 
 function _update_ps1() {
-    export PS1="$(~/shell_packages/powerline-shell/powerline-shell.py $? 2> /dev/null)"
+    export PS1="$(~/dotfiles/powerline-shell/powerline-shell.py $? 2> /dev/null)"
 }
 
 export PROMPT_COMMAND="_update_ps1; $PROMPT_COMMAND"
