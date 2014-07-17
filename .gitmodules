@@ -10,3 +10,6 @@
 [submodule "powerline-fonts"]
 	path = powerline-fonts
 	url = https://github.com/Lokaltog/powerline-fonts.git
+[submodule "maximum-awesome-linux"]
+	path = maximum-awesome-linux
+	url = https://github.com/justaparth/maximum-awesome-linux.git
